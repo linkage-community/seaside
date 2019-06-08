@@ -4,7 +4,12 @@ import (
 	"github.com/kelseyhightower/envconfig"
 )
 
+const (
+	ConfigPrefix = "seaside"
+)
+
 type Config struct {
+	SeaOrigin      string `split_words:"true" default:"https://c.linkage.community"`
 	ClientID       string `split_words:"true" required:"true"`
 	ClientSecret   string `split_words:"true" required:"true"`
 	CredentialFile string `split_words:"true" default:"credential.json"`
@@ -12,12 +17,12 @@ type Config struct {
 
 func Usage() {
 	c := &Config{}
-	envconfig.Usage("seaside", c)
+	envconfig.Usage(ConfigPrefix, c)
 }
 
 func LoadConfig() (*Config, error) {
 	c := &Config{}
-	err := envconfig.Process("seaside", c)
+	err := envconfig.Process(ConfigPrefix, c)
 	if err != nil {
 		return nil, err
 	}

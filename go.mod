@@ -2,6 +2,7 @@ module github.com/otofune/seaside
 
 require (
 	github.com/kelseyhightower/envconfig v1.3.0
-	github.com/pkg/browser v0.0.0-20180916011732-0a3d74bf9ce4 // indirect
 	github.com/pkg/errors v0.8.1
+	github.com/urfave/cli v1.20.0
+	gopkg.in/urfave/cli.v1 v1.20.0
 )

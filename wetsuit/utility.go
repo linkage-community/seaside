@@ -10,22 +10,6 @@ import (
 	"github.com/pkg/errors"
 )
 
-type Wetsuit struct {
-	ClientID     string
-	ClientSecret string
-	AccessToken  string
-	Origin       string
-}
-
-func NewWetsuit(or string, cid string, cs string, at string) *Wetsuit {
-	return &Wetsuit{
-		ClientID:     cid,
-		ClientSecret: cs,
-		Origin:       or,
-		AccessToken:  at,
-	}
-}
-
 func GetAuthorizeURL(origin string, cid string, state string) (string, error) {
 	u, err := url.ParseQuery(fmt.Sprintf("client_id=%s&response_type=code", cid))
 	if err != nil {
