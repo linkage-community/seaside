@@ -42,6 +42,7 @@ func (c *Client) newRequest(method, path string, body io.Reader) (*http.Request,
 		return nil, err
 	}
 	req.Header.Add("Authorization", strings.Join([]string{"Bearer", c.AccessToken}, " "))
+	req.Header.Add("User-Agent", fmt.Sprintf("wetsuit/%s", Version))
 	return req, nil
 }
 
