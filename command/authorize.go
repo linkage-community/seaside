@@ -22,8 +22,12 @@ func ensureTokenByPrompt(config *config.Config) (string, error) {
 
 	sc := bufio.NewScanner(os.Stdin)
 	sc.Scan()
+	if err := sc.Err(); err != nil {
+		fmt.Println(errors.Wrap(err, "Can't read input"))
+		os.Exit(1)
+	}
+
 	code := sc.Text()
-	fmt.Println()
 	token, err := wetsuit.GetToken(config.SeaOrigin, config.ClientID, config.ClientSecret, AuthorizeState, code)
 
 	if err != nil {
@@ -34,27 +38,26 @@ func ensureTokenByPrompt(config *config.Config) (string, error) {
 }
 
 func doAuthorize(ctx *cli.Context) error {
-	config, err := config.LoadConfig()
+	c, err := config.LoadConfig()
 	if err != nil {
 		fmt.Println(errors.Wrap(err, "Can't load LoadConfig"))
 		os.Exit(1)
 	}
 
-	token, err := ensureTokenByPrompt(config)
-
+	token, err := ensureTokenByPrompt(c)
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
+	// padding :innocent:
+	fmt.Println()
 
-	client := wetsuit.NewClient(config.SeaOrigin, config.ClientID, config.ClientSecret, token)
-	// test...
-	r, e := client.Get("/v1/timelines/public")
-	if e != nil {
-		fmt.Println(e)
-	} else {
-		fmt.Printf("%s", r)
+	if err := c.SaveCredential(&config.Credential{AccessToken: token}); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
 	}
+
+	fmt.Print("Welcome to the seaside.")
 
 	return nil
 }

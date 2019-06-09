@@ -36,13 +36,15 @@ func (c *Client) getAPIURL(path string) string {
 
 func (c *Client) newRequest(method, path string, body io.Reader) (*http.Request, error) {
 	url := c.getAPIURL(path)
-	fmt.Println(url)
 	req, err := http.NewRequest(method, url, body)
 	if err != nil {
 		return nil, err
 	}
 	req.Header.Add("Authorization", strings.Join([]string{"Bearer", c.AccessToken}, " "))
 	req.Header.Add("User-Agent", fmt.Sprintf("wetsuit/%s", Version))
+	if method != http.MethodGet {
+		req.Header.Add("Content-Type", "application/json")
+	}
 	return req, nil
 }
 
@@ -127,4 +129,20 @@ func (c *Client) Get(path string) ([]byte, error) {
 	}
 
 	return c.read(resp)
+}
+
+func (c *Client) CreatePost(text string) (int, error) {
+	bytes, err := c.Post("/v1/posts", map[string]interface{}{
+		"text": text,
+	})
+	if err != nil {
+		return 0, err
+	}
+	response := struct {
+		ID int
+	}{}
+	if err := json.Unmarshal(bytes, &response); err != nil {
+		return 0, err
+	}
+	return response.ID, nil
 }
