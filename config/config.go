@@ -5,9 +5,9 @@ import (
 )
 
 const (
-  ConfigPrefix = "seaside"
-  // Version FIXME: 本当にここに置くべきか?
-  Version = "v0.0.1"
+	ConfigPrefix = "seaside"
+	// Version FIXME: 本当にここに置くべきか?
+	Version = "v0.0.1"
 )
 
 type Config struct {
