@@ -48,7 +48,13 @@ func doAuthorize(ctx *cli.Context) error {
 	}
 
 	client := wetsuit.NewClient(config.SeaOrigin, config.ClientID, config.ClientSecret, token)
-	fmt.Println(client)
+	// test...
+	r, e := client.Get("/v1/timelines/public")
+	if e != nil {
+		fmt.Println(e)
+	} else {
+		fmt.Printf("%s", r)
+	}
 
 	return nil
 }
