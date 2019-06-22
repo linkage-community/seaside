@@ -7,7 +7,7 @@ import (
 	"strings"
 
 	"github.com/otofune/seaside/config"
-	"github.com/otofune/seaside/wetsuit"
+	"github.com/otofune/wetsuit"
 	"github.com/pkg/errors"
 	"gopkg.in/urfave/cli.v1"
 )
