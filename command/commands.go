@@ -17,4 +17,5 @@ var Commands = []cli.Command{
 	},
 	AuthozizeCommand,
 	TellCommand,
+	GetPublicTimelineCommand,
 }
