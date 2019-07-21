@@ -15,7 +15,7 @@ import (
 func doTell(ctx *cli.Context) error {
 	c, err := config.LoadConfig()
 	if err != nil {
-		fmt.Println(errors.Wrap(err, "Can't load LoadConfig"))
+		fmt.Println(errors.Wrap(err, "Can't load config"))
 		os.Exit(1)
 	}
 	if err := c.LoadCurrentCredential(); err != nil {

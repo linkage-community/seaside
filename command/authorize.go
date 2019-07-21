@@ -40,7 +40,7 @@ func ensureTokenByPrompt(config *config.Config) (string, error) {
 func doAuthorize(ctx *cli.Context) error {
 	c, err := config.LoadConfig()
 	if err != nil {
-		fmt.Println(errors.Wrap(err, "Can't load LoadConfig"))
+		fmt.Println(errors.Wrap(err, "Can't load config"))
 		os.Exit(1)
 	}
 

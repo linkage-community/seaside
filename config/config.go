@@ -8,8 +8,14 @@ import (
 )
 
 const (
-	ConfigPrefix = "seaside"
+	configPrefix = "seaside"
 	Version      = "v1.0.0"
+)
+
+var (
+	// will set by go tool link (-X option)
+	clientID     string
+	clientSecret string
 )
 
 type Credential struct {
@@ -26,12 +32,20 @@ type Config struct {
 
 func Usage() {
 	c := &Config{}
-	envconfig.Usage(ConfigPrefix, c)
+	envconfig.Usage(configPrefix, c)
 }
 
 func LoadConfig() (*Config, error) {
+	if clientID != "" && clientSecret != "" {
+		return &Config{
+			ClientID:     clientID,
+			ClientSecret: clientSecret,
+		}, nil
+	}
+
+	// fallback
 	c := &Config{}
-	err := envconfig.Process(ConfigPrefix, c)
+	err := envconfig.Process(configPrefix, c)
 	if err != nil {
 		return nil, err
 	}
