@@ -18,10 +18,11 @@ func doGetPublicTimeline(ctx *cli.Context) error {
 	}
 	if err := c.LoadCurrentCredential(); err != nil {
 		fmt.Println(errors.Wrap(err, "You must authenticate before call"))
+		os.Exit(1)
 	}
 
 	client := wetsuit.NewClient(c.SeaOrigin, c.ClientID, c.ClientSecret, c.CurrentCredential.AccessToken)
-	pp, err := client.GetTimeline("public", wetsuit.Limit(ctx.Int("limit")), wetsuit.SinceID(ctx.Int("since-id")), wetsuit.MaxID(ctx.Int("max-id")), wetsuit.Search(ctx.String("like")))
+	pp, err := client.GetTimeline("public", wetsuit.Limit(ctx.Int("limit")), wetsuit.SinceID(ctx.Int("since-id")), wetsuit.MaxID(ctx.Int("max-id")), wetsuit.Search(ctx.String("search")))
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
