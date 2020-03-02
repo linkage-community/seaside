@@ -7,6 +7,7 @@ package helper
 import (
 	"fmt"
 	"strings"
+	"time"
 
 	"github.com/linkage-community/wetsuit/entity"
 )
@@ -33,40 +34,35 @@ func ChooseAlbumFileVariant(a *entity.AlbumFile) *entity.AlbumFileVariant {
 
 func UserToString(u *entity.User) string {
 	user := ""
-	user += fmt.Sprintf("[%d @%s] %s", u.ID, u.ScreenName, u.Name)
-	if u.AvatarFile != nil {
-		user += "\n\t.Avatar: "
-		user += FileToString(u.AvatarFile)
-	}
+	user += fmt.Sprintf("%s @%s [%d]", u.Name, u.ScreenName, u.ID)
 	return user
 }
 
 func FileToString(f *entity.AlbumFile) string {
-	text := ""
-	text += fmt.Sprintf("[%s] ", f.Name)
+	text := fmt.Sprintf("%s ", f.Name)
 	if v := ChooseAlbumFileVariant(f); v != nil {
-		text += fmt.Sprintf("%s", v.URL)
-		return text
+		return text + fmt.Sprintf("[%s]", v.URL)
 	}
 	return text + "unknown"
 }
 
 func PostToString(p entity.Post) string {
-	text := ".User: "
-	text += UserToString(&p.User)
-	if len(strings.TrimSpace(p.Text)) == 0 {
-		text += "\n.Text: empty"
-	} else {
-		text += "\n.Text:\n"
-		text += AddLineIndent(p.Text)
+	text := ""
+	text += "Author:\t" + UserToString(&p.User)
+	if t, err := time.Parse(time.RFC3339, p.CreatedAt); err == nil {
+		text += "\nDate:\t" + t.Local().Format("2006/01/02 15:04:05 MST")
 	}
-	text += fmt.Sprintf("\n.Application: [%d] %s bot=%v", p.Application.ID, p.Application.Name, p.Application.IsAutomated)
+	text += fmt.Sprintf("\nBy:\t%s [%d bot=%v]", p.Application.Name, p.Application.ID, p.Application.IsAutomated)
 	if len(p.Files) != 0 {
-		text += "\n.Files:"
 		for i, f := range p.Files {
-			text += fmt.Sprintf("\n\t#%d ", i)
-			text += FileToString(f)
+			text += fmt.Sprintf("\nFile#%d:\t%s", i, FileToString(f))
 		}
+	}
+
+	if len(strings.TrimSpace(p.Text)) > 0 {
+		text += "\n\n"
+		text += AddLineIndent(p.Text)
+		text += "\n"
 	}
 	return text
 }

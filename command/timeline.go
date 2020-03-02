@@ -34,7 +34,7 @@ func doGetPublicTimeline(ctx *cli.Context) error {
 		fmt.Println("There are no posts.")
 	}
 	for _, p := range posts {
-		fmt.Printf("=== %d ===\n", p.ID)
+		fmt.Printf("> post %d\n", p.ID)
 		if ctx.Bool("no-pretty") {
 			fmt.Printf("\tText: %s\n\tAppl: %v\n\tUser: %v\n\t\tAvatar: %v\n", p.Text, p.Application, p.User, p.User.AvatarFile)
 			if len(p.Files) != 0 {
@@ -43,11 +43,10 @@ func doGetPublicTimeline(ctx *cli.Context) error {
 			for _, f := range p.Files {
 				fmt.Printf("\t\t%v\n", f)
 			}
-			fmt.Print("\n\n")
 		} else {
-			fmt.Print(helper.AddLineIndent(helper.PostToString(p)))
-			fmt.Print("\n\n")
+			fmt.Print(helper.PostToString(p))
 		}
+		fmt.Print("\n\n")
 	}
 
 	return nil
