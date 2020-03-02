@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/otofune/seaside/config"
-	"github.com/otofune/wetsuit"
+	"github.com/linkage-community/seaside/config"
+	"github.com/linkage-community/wetsuit"
 	"github.com/pkg/errors"
 	"gopkg.in/urfave/cli.v1"
 )
@@ -18,10 +18,11 @@ func doGetPublicTimeline(ctx *cli.Context) error {
 	}
 	if err := c.LoadCurrentCredential(); err != nil {
 		fmt.Println(errors.Wrap(err, "You must authenticate before call"))
+		os.Exit(1)
 	}
 
 	client := wetsuit.NewClient(c.SeaOrigin, c.ClientID, c.ClientSecret, c.CurrentCredential.AccessToken)
-	pp, err := client.GetTimeline("public", wetsuit.Limit(ctx.Int("limit")), wetsuit.SinceID(ctx.Int("since-id")), wetsuit.MaxID(ctx.Int("max-id")))
+	pp, err := client.GetTimeline("public", wetsuit.Limit(ctx.Int("limit")), wetsuit.SinceID(ctx.Int("since-id")), wetsuit.MaxID(ctx.Int("max-id")), wetsuit.Search(ctx.String("search")))
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
@@ -63,6 +64,10 @@ var GetPublicTimelineCommand = cli.Command{
 		cli.IntFlag{
 			Name:  "since-id, s",
 			Usage: "WHERE id > s",
+		},
+		cli.StringFlag{
+			Name:  "search, q",
+			Usage: "LIKE %l%",
 		},
 	},
 }

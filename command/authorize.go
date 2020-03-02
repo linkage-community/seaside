@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/otofune/seaside/config"
-	"github.com/otofune/wetsuit"
+	"github.com/linkage-community/seaside/config"
+	"github.com/linkage-community/wetsuit"
 	"github.com/pkg/errors"
 	"gopkg.in/urfave/cli.v1"
 )

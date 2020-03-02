@@ -1,7 +1,7 @@
 package command
 
 import (
-	"github.com/otofune/seaside/config"
+	"github.com/linkage-community/seaside/config"
 	"gopkg.in/urfave/cli.v1"
 )
 

@@ -1,8 +1,10 @@
 github.com/kelseyhightower/envconfig v1.3.0 h1:IvRS4f2VcIQy6j4ORGIf9145T/AsUB+oY8LyvN8BXNM=
 github.com/kelseyhightower/envconfig v1.3.0/go.mod h1:cccZRl6mQpaq41TPp5QxidR+Sa3axMbJDNb//FQX6Gg=
-github.com/otofune/wetsuit v1.1.0 h1:zq8Q6gsljDgIMYmMUm7FZ891s/Fi7ppzfzoLPxzByoM=
-github.com/otofune/wetsuit v1.1.0/go.mod h1:gAvP/jNxnkSORCCoNI+NcpR/lsN09+lXCU2Vxn+SeT4=
+github.com/linkage-community/wetsuit v1.1.1 h1:BCJjg0FvPEoK74bMsjW93ElgiSYhmpsu7LsxCqt/3Cg=
+github.com/linkage-community/wetsuit v1.1.1/go.mod h1:YO3c6uhbv6HKAIHyZ1Oc+SUSGlGKqG1s0zdYFva9oP8=
 github.com/pkg/errors v0.8.1 h1:iURUrRGxPUNPdy5/HRSm+Yj6okJ6UtLINN0Q9M4+h3I=
 github.com/pkg/errors v0.8.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
+github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
+github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
 gopkg.in/urfave/cli.v1 v1.20.0 h1:NdAVW6RYxDif9DhDHaAortIu956m2c0v+09AZBPTbE0=
 gopkg.in/urfave/cli.v1 v1.20.0/go.mod h1:vuBzUtMdQeixQj8LVd+/98pzhxNGQoyuPBlsXHOQNO0=

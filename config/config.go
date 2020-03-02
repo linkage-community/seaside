@@ -9,7 +9,7 @@ import (
 
 const (
 	configPrefix = "seaside"
-	Version      = "v1.0.0"
+	Version      = "v1.0.1"
 )
 
 var (

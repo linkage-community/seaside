@@ -3,8 +3,8 @@ package main
 import (
 	"os"
 
-	"github.com/otofune/seaside/command"
-	"github.com/otofune/seaside/config"
+	"github.com/linkage-community/seaside/command"
+	"github.com/linkage-community/seaside/config"
 	"gopkg.in/urfave/cli.v1"
 )
 
