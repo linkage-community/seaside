@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/linkage-community/seaside/config"
+	"github.com/linkage-community/seaside/helper"
 	"github.com/linkage-community/wetsuit"
 	"github.com/pkg/errors"
 	"gopkg.in/urfave/cli.v1"
@@ -33,14 +34,9 @@ func doGetPublicTimeline(ctx *cli.Context) error {
 		fmt.Println("There are no posts.")
 	}
 	for _, p := range posts {
-		fmt.Printf("=== %d ===\n\tText: %s\n\tAppl: %v\n\tUser: %v\n\t\tAvatar: %v\n", p.ID, p.Text, p.Application, p.User, p.User.AvatarFile)
-		if len(p.Files) != 0 {
-			fmt.Printf("\tFiles:\n")
-		}
-		for _, f := range p.Files {
-			fmt.Printf("\t\t%v\n", f)
-		}
-		fmt.Println()
+		fmt.Printf("=== %d ===\n", p.ID)
+		fmt.Print(helper.AddLineIndent(helper.PostToString(p)))
+		fmt.Print("\n\n")
 	}
 
 	return nil
