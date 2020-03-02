@@ -35,8 +35,19 @@ func doGetPublicTimeline(ctx *cli.Context) error {
 	}
 	for _, p := range posts {
 		fmt.Printf("=== %d ===\n", p.ID)
-		fmt.Print(helper.AddLineIndent(helper.PostToString(p)))
-		fmt.Print("\n\n")
+		if ctx.Bool("no-pretty") {
+			fmt.Printf("\tText: %s\n\tAppl: %v\n\tUser: %v\n\t\tAvatar: %v\n", p.Text, p.Application, p.User, p.User.AvatarFile)
+			if len(p.Files) != 0 {
+				fmt.Printf("\tFiles:\n")
+			}
+			for _, f := range p.Files {
+				fmt.Printf("\t\t%v\n", f)
+			}
+			fmt.Print("\n\n")
+		} else {
+			fmt.Print(helper.AddLineIndent(helper.PostToString(p)))
+			fmt.Print("\n\n")
+		}
 	}
 
 	return nil
@@ -64,6 +75,10 @@ var GetPublicTimelineCommand = cli.Command{
 		cli.StringFlag{
 			Name:  "search, q",
 			Usage: "LIKE %l%",
+		},
+		cli.BoolFlag{
+			Name:  "no-pretty",
+			Usage: "eg: print all file variants",
 		},
 	},
 }
