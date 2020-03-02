@@ -59,9 +59,9 @@ func PostToString(p entity.Post) string {
 		}
 	}
 
-	if len(strings.TrimSpace(p.Text)) > 0 {
+	if body := strings.TrimSpace(p.Text); len(body) > 0 {
 		text += "\n\n"
-		text += AddLineIndent(p.Text)
+		text += AddLineIndent(body)
 		text += "\n"
 	}
 	return text
