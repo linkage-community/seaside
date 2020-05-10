@@ -73,7 +73,7 @@ var GetPublicTimelineCommand = cli.Command{
 		},
 		cli.StringFlag{
 			Name:  "search, q",
-			Usage: "LIKE q",
+			Usage: "SQL 'LIKE q'. eg: -q '%example%'",
 		},
 		cli.BoolFlag{
 			Name:  "no-pretty",
